@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+    <header>
+        <div class="content">
+            <h1 class="title">The Job Board
+              <div class="aurora">
+                <div class="aurora__item"></div>
+                <div class="aurora__item"></div>
+                <div class="aurora__item"></div>
+                <div class="aurora__item"></div>
+              </div>
+            </h1>
+            <p class="subtitle">Find your job today.</p>
+          </div>
+    </header>
+
+  
+    
+    <section class= "search-bar">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search jobs by title, company or tag..." />
+            <button id="fulltime-btn" data-type="Full-Time">💼 Full-Time</button>
+            <button id="remote-btn" data-type="Remote">📍Remote</button>
+        </section>
+        <main>
+            <div class="ag-format-container">
+                <div id="job-list" class="ag-courses_box"></div>
+            </div>
+            
+        </main>
+     
+            <div id="job-modal" class="modal hidden">
+             <div class="modal-content">
+                <span id="close-modal" class="close">&times;</span>
+                <h2 id="modal-title"></h2>
+                <p id="modal-company"></p>
+                <p id="modal-description"></p>
+                <a id="modal-apply" href="#" target="_blank">Apply Now</a>
+
+             </div>
+            </div>
+           
+            <!-- Modal Structure -->
+<div id="apply-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="modal-job-title"></h2>
+      <form id="application-form">
+        <label for="applicant-name">Your Name:</label>
+        <input type="text" id="applicant-name" name="name" required>
+  
+        <label for="applicant-email">Email:</label>
+        <input type="email" id="applicant-email" name="email" required>
+  
+        <label for="applicant-message">Message:</label>
+        <textarea id="applicant-message" name="message"></textarea>
+  
+        <button type="submit">Submit Application</button>
+        <button type="button" id="close-modal">Close</button>
+      </form>
+    </div>
+  </div>
+  
+
+    
+     
+        <!--Job cards rendered by JS-->
+  
+    <script src="script.js"></script>
+</body>
+</html>
