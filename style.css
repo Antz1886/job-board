@@ -421,6 +421,42 @@ body {
     aurora-4 24s ease-in-out infinite alternate;
 }
 
+#job-filter-sidebar {
+  width: 250px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+#job-filter-sidebar label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#job-filter-sidebar input,
+#job-filter-sidebar select {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+#job-filter-sidebar button {
+  margin-top: 10px;
+  padding: 8px;
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#job-filter-sidebar button:hover {
+  background-color: #0056b3;
+}
+
 @keyframes aurora-1 {
   0% {
     top: 0;
