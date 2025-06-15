@@ -49,6 +49,49 @@
 
              </div>
             </div>
+
+    <!-- Sidebar Filters -->
+<aside id="job-filter-sidebar">
+  <h2>Filter Jobs</h2>
+
+  <!-- Job Type -->
+  <label>Job Type:</label>
+  <select id="filter-job-type">
+    <option value="">All</option>
+    <option value="full-time">Full-Time</option>
+    <option value="part-time">Part-Time</option>
+    <option value="contract">Contract</option>
+    <option value="internship">Internship</option>
+  </select>
+
+  <!-- Location -->
+  <label>Location:</label>
+  <input type="text" id="filter-location" placeholder="e.g. Cape Town" />
+
+  <!-- Salary Range -->
+  <label>Salary Range:</label>
+  <input type="number" id="filter-salary-min" placeholder="Min" />
+  <input type="number" id="filter-salary-max" placeholder="Max" />
+
+  <!-- Experience Level -->
+  <label>Experience Level:</label>
+  <select id="filter-experience">
+    <option value="">All</option>
+    <option value="junior">Junior</option>
+    <option value="mid">Mid</option>
+    <option value="senior">Senior</option>
+  </select>
+
+  <!-- Remote Work -->
+  <label>
+    <input type="checkbox" id="filter-remote" />
+    Remote Only
+  </label>
+
+  <!-- Apply Filters Button -->
+  <button onclick="applyFilters()">Apply Filters</button>
+</aside>
+
            
             <!-- Modal Structure -->
 <div id="apply-modal" class="modal hidden">
