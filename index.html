@@ -3,131 +3,607 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siyaphambili Jobs - Premium Enterprise Talent Hub</title>
+    <meta name="description" content="South Africa's premium enterprise talent platform bridging spatial, digital, and skills gaps. Find Learnerships, Internships, and Experienced Careers.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
-
 </head>
-
 <body>
+    <!-- Top Utility Bar -->
+    <div id="top-bar">
+        <div class="top-bar-content">
+            <div class="top-bar-logo">
+                <img src="siyaphambili_logo.png" class="top-bar-logo-img" alt="Siyaphambili logo" />
+                <span class="top-bar-title">Siyaphambili Jobs</span>
+            </div>
+            <span class="status-indicator">
+                <span class="pulse-dot"></span> Supporting Youth Employment | 🔒 POPIA Secured
+            </span>
+            <div class="top-bar-actions">
+                <button id="cvbuilder-toggle" class="btn-pill">📝 Build CV (Mobile-Friendly)</button>
+                <button id="datasaver-toggle" class="btn-pill">🍃 Data-Saver: OFF</button>
+                <button id="persona-toggle" class="btn-pill btn-persona">💼 Recruiter Console</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
     <header>
         <div class="content">
-            <h1 class="title">The Job Board
-              <div class="aurora">
-                <div class="aurora__item"></div>
-                <div class="aurora__item"></div>
-                <div class="aurora__item"></div>
-                <div class="aurora__item"></div>
-              </div>
-            </h1>
-            <p class="subtitle">Find your job today.</p>
-          </div>
+            <div class="brand-logo-container">
+                <img class="brand-logo-img" src="siyaphambili_logo.png" alt="Siyaphambili Careers Logo" />
+            </div>
+            <p id="platform-subtitle" class="subtitle">Mzansi's Premium Enterprise Talent Platform</p>
+            <p id="platform-tagline" class="tagline">Bridging the spatial divide and accelerating youth potential</p>
+        </div>
     </header>
 
-  
-    
-    <section class= "search-bar">
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search jobs by title, company or tag..." />
-            <button id="fulltime-btn" data-type="Full-Time">💼 Full-Time</button>
-            <button id="remote-btn" data-type="Remote">📍Remote</button>
+    <!-- CANDIDATE VIEW PORTION -->
+    <div id="candidate-view-container">
+        <!-- Top Quick Categories / Fast Filters -->
+        <section class="search-bar">
+            <div class="search-input-wrapper">
+                <span class="search-icon">🔍</span>
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search jobs by title, company or key skills..." />
+            </div>
+            <div class="fast-filters">
+                <span class="fast-filter-label">Quick Search:</span>
+                <button id="fulltime-btn" data-type="learnership">💼 Learnerships</button>
+                <button id="remote-btn" data-type="internship">📍 Internships</button>
+            </div>
         </section>
-        <main>
-            <div class="ag-format-container">
-                <div id="job-list" class="ag-courses_box"></div>
+
+        <!-- Main Content Container -->
+        <div class="app-layout">
+            <!-- Sidebar Filters (Mockup Styling) -->
+            <aside id="job-filter-sidebar">
+                <div class="sidebar-header">
+                    <h2>Filtering</h2>
+                    <button class="btn-text" onclick="resetFilters()">Reset</button>
+                </div>
+
+                <!-- Job Categories -->
+                <div class="filter-group">
+                    <label>Job Category</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="cat-tech" checked />
+                            <span>Tech</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="cat-corporate" checked />
+                            <span>Corporate</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="cat-learnership" checked />
+                            <span>Learnership</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Location dropdown -->
+                <div class="filter-group">
+                    <label for="filter-location-dropdown">Location</label>
+                    <select id="filter-location-dropdown">
+                        <option value="">Major Cities</option>
+                        <option value="Johannesburg">Johannesburg</option>
+                        <option value="Cape Town">Cape Town</option>
+                        <option value="Durban">Durban</option>
+                        <option value="Pretoria">Pretoria</option>
+                    </select>
+                </div>
+
+                <!-- Experience Slider -->
+                <div class="filter-group">
+                    <label>Experience Level</label>
+                    <input type="range" id="filter-experience-slider" min="0" max="10" value="0" class="slider" />
+                    <div class="slider-labels">
+                        <span>Matric/Youth</span>
+                        <span>Mid</span>
+                        <span>Senior</span>
+                    </div>
+                </div>
+
+                <!-- Salary Range Slider -->
+                <div class="filter-group">
+                    <label>Salary Range (ZAR)</label>
+                    <input type="range" id="filter-salary-slider" min="5000" max="80000" step="5000" value="80000" class="slider" />
+                    <div class="slider-labels">
+                        <span id="salary-slider-min">R5,000</span>
+                        <span id="salary-slider-val" class="highlight-val">Max: R80,000</span>
+                    </div>
+                </div>
+
+                <!-- Transit Availability -->
+                <div class="filter-group">
+                    <label>Commute Transit</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="transit-gautrain" />
+                            <span>Gautrain Proximity</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="transit-myciti" />
+                            <span>MyCiTi Bus Route</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="transit-taxi" />
+                            <span>Minibus Taxi Hub</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Verification Status -->
+                <div class="filter-group">
+                    <label>Compliance Vetting</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="verify-saqa" />
+                            <span>SAQA Verified Only</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="btn-primary filter-submit-btn" onclick="applyFilters()">Apply Filters</button>
+            </aside>
+
+            <!-- Main Job Board Grid (Grouped by Category matching mockup) -->
+            <main class="main-content">
+                <div class="ag-format-container">
+                    <div id="job-categories-wrapper">
+                        <!-- Categories injected dynamically: Tech Jobs, Corporate Jobs, Learnerships -->
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Candidate Status Dashboard (Applications Tracker) -->
+        <section id="applicant-dashboard">
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h3>💼 Your Active Applications</h3>
+                    <span class="dashboard-tag">Local Storage Cache Sync</span>
+                </div>
+                <div id="applicant-dashboard-list" class="dashboard-list">
+                    <!-- Injected via JavaScript -->
+                </div>
             </div>
-            
-        </main>
-     
-            <div id="job-modal" class="modal hidden">
-             <div class="modal-content">
-                <span id="close-modal" class="close">&times;</span>
-                <h2 id="modal-title"></h2>
-                <p id="modal-company"></p>
-                <p id="modal-description"></p>
-                <a id="modal-apply" href="#" target="_blank">Apply Now</a>
-
-             </div>
-            </div>
-
-    <div class="job-card" 
-     data-type="full-time" 
-     data-location="cape town" 
-     data-salary="35000" 
-     data-experience="junior" 
-     data-remote="true">
-  <!-- Job Content -->
-</div>
-
-
-    <!-- Sidebar Filters -->
-<aside id="job-filter-sidebar">
-  <h2>Filter Jobs</h2>
-
-  <!-- Job Type -->
-  <label>Job Type:</label>
-  <select id="filter-job-type">
-    <option value="">All</option>
-    <option value="full-time">Full-Time</option>
-    <option value="part-time">Part-Time</option>
-    <option value="contract">Contract</option>
-    <option value="internship">Internship</option>
-  </select>
-
-  <!-- Location -->
-  <label>Location:</label>
-  <input type="text" id="filter-location" placeholder="e.g. Cape Town" />
-
-  <!-- Salary Range -->
-  <label>Salary Range:</label>
-  <input type="number" id="filter-salary-min" placeholder="Min" />
-  <input type="number" id="filter-salary-max" placeholder="Max" />
-
-  <!-- Experience Level -->
-  <label>Experience Level:</label>
-  <select id="filter-experience">
-    <option value="">All</option>
-    <option value="junior">Junior</option>
-    <option value="mid">Mid</option>
-    <option value="senior">Senior</option>
-  </select>
-
-  <!-- Remote Work -->
-  <label>
-    <input type="checkbox" id="filter-remote" />
-    Remote Only
-  </label>
-
-  <!-- Apply Filters Button -->
-  <button onclick="applyFilters()">Apply Filters</button>
-</aside>
-
-           
-            <!-- Modal Structure -->
-<div id="apply-modal" class="modal hidden">
-    <div class="modal-content">
-      <h2 id="modal-job-title"></h2>
-      <form id="application-form">
-        <label for="applicant-name">Your Name:</label>
-        <input type="text" id="applicant-name" name="name" required>
-  
-        <label for="applicant-email">Email:</label>
-        <input type="email" id="applicant-email" name="email" required>
-  
-        <label for="applicant-message">Message:</label>
-        <textarea id="applicant-message" name="message"></textarea>
-  
-        <button type="submit">Submit Application</button>
-        <button type="button" id="close-modal">Close</button>
-      </form>
+        </section>
     </div>
-  </div>
-  
 
-    
-     
-        <!--Job cards rendered by JS-->
-  
+
+    <!-- EMPLOYER / RECRUITER VIEW PORTION (Mockup Layout Matching) -->
+    <div id="recruiter-view-container" class="hidden">
+        <!-- Dashboard Profile Header -->
+        <div class="recruiter-dashboard-header">
+            <div class="recruiter-header-logo">
+                <img src="siyaphambili_logo.png" class="recruiter-header-logo-img" alt="Siyaphambili logo" />
+                <h2>Recruiter Command Center</h2>
+            </div>
+            <div class="recruiter-profile-meta">
+                <span class="recruiter-nav-link">Dynamic links</span>
+                <span class="recruiter-nav-link">Export Tool</span>
+                <div class="recruiter-user-profile">
+                    <img class="recruiter-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=80&h=80&q=80" alt="Recruiter Avatar" />
+                    <span>Mark van Zyl</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="recruiter-layout">
+            <!-- Left Sidebar Navigation Menu (Mockup Styling) -->
+            <div class="recruiter-sidebar">
+                <div class="recruiter-menu-card">
+                    <ul class="recruiter-menu-list">
+                        <li class="menu-item active-menu" data-view="dashboard">🎛️ Dashboard</li>
+                        <li class="menu-item" data-view="jobs" id="post-job-trigger">💼 Post Positions</li>
+                        <li class="menu-item" data-view="applicants">👥 Candidates</li>
+                        <li class="menu-item" data-view="scorecard">📊 Scorecards</li>
+                        <li class="menu-item" data-view="reports">📈 Reports</li>
+                        <li class="menu-item" data-view="settings">⚙️ Settings</li>
+                    </ul>
+                </div>
+
+                <!-- BEE Scorecard Circular Gauge widget (Mockup Layout) -->
+                <div class="bee-incentive-card">
+                    <div class="bee-header">
+                        <h4>BEE SCORECARD</h4>
+                        <span class="badge badge-saqa">Level 2</span>
+                    </div>
+                    
+                    <!-- Circular Progress Gauge -->
+                    <div class="gauge-container">
+                        <svg class="progress-ring" width="120" height="120">
+                            <circle class="progress-ring__background" stroke="#2a364f" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                            <circle class="progress-ring__circle" stroke="#00c2ff" stroke-width="8" fill="transparent" r="50" cx="60" cy="60" stroke-dasharray="314.15" stroke-dashoffset="36"/>
+                        </svg>
+                        <div class="gauge-percentage">
+                            <span class="gauge-number" id="bee-points-percentage">88.5%</span>
+                            <span class="gauge-lbl">88.5 Points</span>
+                        </div>
+                    </div>
+
+                    <hr class="bee-divider">
+                    <div class="bee-header">
+                        <h4>SECTION 12H TAX ALLOWANCE</h4>
+                    </div>
+                    <div class="tax-value-display">
+                        <span class="tax-lbl-small">Total Allowances:</span>
+                        <strong id="bee-tax-deduction" class="text-green">R245,000</strong>
+                    </div>
+
+                    <div class="bee-stats">
+                        <div class="bee-stat-row">
+                            <span>Current Savings:</span>
+                            <strong class="text-blue" id="bee-current-savings">R165,000</strong>
+                        </div>
+                        <div class="bee-stat-row">
+                            <span>Projected Placement Deductions:</span>
+                            <strong class="text-green" id="bee-projected-savings">R80,000</strong>
+                        </div>
+                    </div>
+                    <button class="btn-secondary btn-full" onclick="alert('Generating SARS Annexure 12H Tax Claim Summary PDF...')">Tax Report</button>
+                </div>
+            </div>
+
+            <!-- Main Panel: Listed Positions & Applicants Review -->
+            <div class="recruiter-main-workspace">
+                
+                <!-- TOP BLOCK: Active Job Listings Table -->
+                <div class="recruiter-table-panel">
+                    <h3>ACTIVE JOB LISTING:</h3>
+                    <div class="table-responsive">
+                        <table class="recruiter-jobs-table">
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Location</th>
+                                    <th>Applicants</th>
+                                    <th>Status</th>
+                                    <th>Posted</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recruiter-table-body">
+                                <!-- Loaded dynamically via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- BOTTOM BLOCK: Detailed Applicant Screening Screen -->
+                <div class="recruiter-applicant-audit-panel">
+                    <div class="audit-panel-header">
+                        <h3>DETAILED APPLICANT SCREEN</h3>
+                        <button id="export-shortlist-btn" class="btn-pill btn-export hidden">📥 Export Shortlist (CSV)</button>
+                    </div>
+                    
+                    <div id="recruiter-applicant-list" class="applicant-audit-container">
+                        <!-- Loaded dynamically when job row selected -->
+                        <div class="select-listing-prompt">
+                            <p>Select one of your active listings from the table above to screen applicant CVs and credentials.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modals Area -->
+
+    <!-- 1. Job Description & Spec Modal -->
+    <div id="job-modal" class="modal hidden">
+        <div class="modal-content glass-modal">
+            <span id="close-job-modal" class="close close-modal-trigger">&times;</span>
+            <div class="modal-header-branding">
+                <span class="enterprise-stamp">OFFICIAL LISTING</span>
+                <h2 id="modal-title"></h2>
+                <h4 id="modal-company"></h4>
+            </div>
+            <hr class="modal-divider">
+            <div id="modal-description"></div>
+            <div class="modal-action-bar">
+                <button class="btn-secondary close-modal-trigger">Back to Listings</button>
+                <button id="modal-apply" class="btn-primary">Apply Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Application Form Modal -->
+    <div id="apply-modal" class="modal hidden">
+        <div class="modal-content glass-modal">
+            <span id="close-apply-modal" class="close close-modal-trigger">&times;</span>
+            <div class="modal-header-branding">
+                <span class="enterprise-stamp">APPLICATION FORM</span>
+                <h2 id="modal-job-title"></h2>
+                <p class="modal-sub-branding">Siyaphambili Secured Talent Portal</p>
+            </div>
+            <hr class="modal-divider">
+            
+            <form id="application-form">
+                <div class="form-group">
+                    <label for="applicant-name">Full Name:</label>
+                    <input type="text" id="applicant-name" name="name" required placeholder="e.g. Thabo Mokoena">
+                </div>
+                
+                <div class="form-group">
+                    <label for="applicant-email">Email Address:</label>
+                    <input type="email" id="applicant-email" name="email" required placeholder="e.g. thabo@gmail.com">
+                </div>
+          
+                <div class="form-group">
+                    <label for="applicant-message">Cover Letter / Supporting Notes:</label>
+                    <textarea id="applicant-message" name="message" placeholder="Briefly state why you're a good fit, transport ease, or skills qualifications..."></textarea>
+                </div>
+
+                <div class="alert-info-box">
+                    💡 <strong>Tip:</strong> If you built a CV using the Siyaphambili CV tool, your profile details will auto-fill to save data!
+                </div>
+
+                <!-- POPIA Legal Consent Checkbox -->
+                <div class="popia-notice-card">
+                    <h5>POPI Act Legal Declaration</h5>
+                    <p>Siyaphambili is committed to protecting applicant privacy. Your personal information will be stored securely and will only be shared with the recruiting employer for this job application process.</p>
+                    <label class="checkbox-label popia-checkbox">
+                        <input type="checkbox" id="apply-popia-consent" required />
+                        <strong>I consent to processing my personal information for this recruitment workflow.</strong>
+                    </label>
+                </div>
+          
+                <div class="modal-action-bar">
+                    <span id="apply-draft-status" class="draft-status-label"></span>
+                    <button type="button" class="btn-secondary close-modal-trigger">Cancel</button>
+                    <button type="submit" class="btn-primary">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. Mobile CV Builder Modal -->
+    <div id="cv-modal" class="modal hidden">
+        <div class="modal-content cv-builder-modal glass-modal">
+            <span id="close-cv-modal" class="close close-modal-trigger">&times;</span>
+            <div class="modal-header-branding">
+                <span class="enterprise-stamp">CV GENERATOR</span>
+                <h2>Data-Saver CV Builder</h2>
+                <p class="modal-sub-branding">Create and download a professional, standard CV optimized for South African corporate screening.</p>
+            </div>
+            <hr class="modal-divider">
+
+            <div class="cv-layout-grid">
+                <!-- Left Column: Fields Input Form -->
+                <form id="cv-form" class="cv-input-form" onsubmit="event.preventDefault();">
+                    <div class="form-group">
+                        <label for="cv-name">Full Name</label>
+                        <input type="text" id="cv-name" placeholder="Thabo Mokoena" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cv-title">Professional Title / Goal</label>
+                        <input type="text" id="cv-title" placeholder="Customer Service Agent / Graduate Chemist">
+                    </div>
+                    <div class="cv-form-row">
+                        <div class="form-group">
+                            <label for="cv-email">Email Address</label>
+                            <input type="email" id="cv-email" placeholder="thabo@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cv-phone">Phone Number</label>
+                            <input type="text" id="cv-phone" placeholder="082 123 4567" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cv-location">Location (City, Province)</label>
+                        <input type="text" id="cv-location" placeholder="Soweto, Gauteng">
+                    </div>
+                    <div class="form-group">
+                        <label for="cv-summary">Professional Summary</label>
+                        <textarea id="cv-summary" placeholder="A dedicated matriculant/graduate with strong teamwork capabilities and a passion for customer satisfaction. Looking for an entry-level opportunity..."></textarea>
+                    </div>
+
+                    <!-- Structured South African Skill Tags Selector -->
+                    <div class="form-group">
+                        <label>Key Skills & Licenses (Tap to add)</label>
+                        <div id="cv-skills-selector-grid" class="skills-selector-grid">
+                            <span class="skill-pill" data-skill="Matric (Grade 12)">Matric (Grade 12)</span>
+                            <span class="skill-pill" data-skill="Code 10 License">Code 10 License</span>
+                            <span class="skill-pill" data-skill="Code 14 License">Code 14 License</span>
+                            <span class="skill-pill" data-skill="PDP Permit">PDP Permit</span>
+                            <span class="skill-pill" data-skill="Excel / MS Office">Excel / MS Office</span>
+                            <span class="skill-pill" data-skill="Customer Relations">Customer Relations</span>
+                            <span class="skill-pill" data-skill="isiZulu Fluent">isiZulu Fluent</span>
+                            <span class="skill-pill" data-skill="English Fluent">English Fluent</span>
+                            <span class="skill-pill" data-skill="Call Center Operations">Call Center Ops</span>
+                            <span class="skill-pill" data-skill="Cashier Operations">Cashier Ops</span>
+                            <span class="skill-pill" data-skill="First Aid Certificate">First Aid Certificate</span>
+                            <span class="skill-pill" data-skill="React / JavaScript">React / JavaScript</span>
+                        </div>
+                        <input type="hidden" id="cv-skills" value="" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cv-experience">Work Experience / Volunteering / Leadership</label>
+                        <textarea id="cv-experience" rows="4" placeholder="e.g.
+• Cashier, Local Spaza Shop (Jan 2024 - Present)
+• Youth Leader, Soweto Community Center (2023)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="cv-education">Education & Credentials</label>
+                        <textarea id="cv-education" rows="3" placeholder="e.g.
+• National Senior Certificate (Grade 12), Soweto High School (2023)
+• Certificate in Retail, online free course (2024)"></textarea>
+                    </div>
+
+                    <!-- POPIA Consent for CV storage -->
+                    <div class="popia-notice-card">
+                        <label class="checkbox-label popia-checkbox">
+                            <input type="checkbox" id="cv-popia-consent" required />
+                            <span><strong>Authorize Local Profile Caching:</strong> I consent to Siyaphambili securely caching my CV details on this browser in compliance with POPIA.</span>
+                        </label>
+                    </div>
+                    
+                    <div class="cv-actions">
+                        <button type="button" id="cv-save-btn" class="btn-secondary">💾 Save Data</button>
+                    </div>
+                </form>
+
+                <!-- Right Column: Live Printable Preview -->
+                <div class="cv-live-preview">
+                    <h3>Live Print Preview</h3>
+                    <div id="cv-preview-container">
+                        <!-- Loaded by JS dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <hr class="modal-divider">
+            <div class="modal-action-bar">
+                <span id="cv-draft-status" class="draft-status-label"></span>
+                <button type="button" class="btn-secondary close-modal-trigger">Close Builder</button>
+                <button type="button" id="cv-print-btn" class="btn-primary">📄 Print / Download PDF CV</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Recruiter "Post a Position" Modal -->
+    <div id="post-job-modal" class="modal hidden">
+        <div class="modal-content glass-modal">
+            <span id="close-post-modal" class="close close-modal-trigger">&times;</span>
+            <div class="modal-header-branding">
+                <span class="enterprise-stamp">RECRUITMENT PORTAL</span>
+                <h2>Post a New Position</h2>
+                <p class="modal-sub-branding">Add a job, learnership, or internship. Fill out transit and compliance fields to attract verified youth talent.</p>
+            </div>
+            <hr class="modal-divider">
+
+            <form id="post-job-form">
+                <div class="form-group">
+                    <label for="post-title">Job Title</label>
+                    <input type="text" id="post-title" required placeholder="e.g. Junior Web Administrator">
+                </div>
+
+                <div class="cv-form-row">
+                    <div class="form-group">
+                        <label for="post-company">Company Name</label>
+                        <input type="text" id="post-company" required placeholder="e.g. Vodacom">
+                    </div>
+                    <div class="form-group">
+                        <label for="post-opportunity">Opportunity Type</label>
+                        <select id="post-opportunity" required>
+                            <option value="learnership">Learnership (NQF Program)</option>
+                            <option value="internship">Internship & Graduate Program</option>
+                            <option value="entry-level">Entry-Level Position</option>
+                            <option value="experienced">Experienced Career</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="cv-form-row">
+                    <div class="form-group">
+                        <label for="post-province">Province</label>
+                        <select id="post-province" required>
+                            <option value="Gauteng">Gauteng</option>
+                            <option value="Western Cape">Western Cape</option>
+                            <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                            <option value="Mpumalanga">Mpumalanga</option>
+                            <option value="Eastern Cape">Eastern Cape</option>
+                            <option value="Free State">Free State</option>
+                            <option value="Limpopo">Limpopo</option>
+                            <option value="North West">North West</option>
+                            <option value="Northern Cape">Northern Cape</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-location">City / Suburb</label>
+                        <input type="text" id="post-location" required placeholder="e.g. Midrand, Johannesburg">
+                    </div>
+                </div>
+
+                <div class="cv-form-row">
+                    <div class="form-group">
+                        <label for="post-salary">Monthly Salary / Stipend (ZAR)</label>
+                        <input type="number" id="post-salary" required placeholder="e.g. 7500">
+                    </div>
+                    <div class="form-group">
+                        <label for="post-duration">Job Duration Type</label>
+                        <select id="post-duration" required>
+                            <option value="full-time">Full-Time</option>
+                            <option value="part-time">Part-Time</option>
+                            <option value="contract">Contract (e.g. 12 months)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="cv-form-row">
+                    <!-- Transit Selection -->
+                    <div class="form-group">
+                        <label>Transit Options</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="post-transit-gautrain" />
+                                <span>Gautrain Access</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="post-transit-myciti" />
+                                <span>MyCiTi Access</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="post-transit-taxi" />
+                                <span>Minibus Taxi Proximity</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- Compliance Selection -->
+                    <div class="form-group">
+                        <label>Vetting/Compliance Checks</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="post-verify-saqa" checked />
+                                <span>Require SAQA check</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="post-verify-id" checked />
+                                <span>Require ID check</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="post-remote" />
+                        <strong>Remote Work / WFH allowed</strong>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="post-skills">Required Skills (Comma separated)</label>
+                    <input type="text" id="post-skills" placeholder="e.g. Excel, Communication, Matric, Python">
+                </div>
+
+                <div class="form-group">
+                    <label for="post-desc">Job Description</label>
+                    <textarea id="post-desc" rows="4" required placeholder="Describe the responsibilities, working hours, and career trajectory..."></textarea>
+                </div>
+
+                <div class="modal-action-bar">
+                    <button type="button" class="btn-secondary close-modal-trigger">Cancel</button>
+                    <button type="submit" class="btn-primary">Post Opportunity</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Print area that will be injected only during browser print action -->
+    <div id="cv-print-area" class="print-only"></div>
+
     <script src="script.js"></script>
 </body>
 </html>
